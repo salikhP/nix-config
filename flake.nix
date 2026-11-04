@@ -123,6 +123,10 @@
                   ]);
 
                 # Your personal home-manager configuration
+                home.file.".config/git/allowed_signers".text = ''
+                  salikh.pernebek@mailerlite.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIziC0yA6LSd5ArpkTyLM1HNGd6tBRvv7dyFg2kTBebC
+                '';
+
                 # Git identity + commit signing via the 1Password SSH agent
                 programs.git = {
                   enable = true;
@@ -130,6 +134,8 @@
                     name = "Salikh Pernebek";
                     email = "salikh.pernebek@mailerlite.com";
                   };
+                  # Trusted keys for local verification (git log --show-signature)
+                  settings.gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
                   signing = {
                     key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIziC0yA6LSd5ArpkTyLM1HNGd6tBRvv7dyFg2kTBebC";
                     format = "ssh";
